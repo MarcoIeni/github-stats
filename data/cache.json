@@ -1,0 +1,60 @@
+{
+  "stats": [
+    {
+      "id": {
+        "name": "MarcoIeni"
+      },
+      "followers": 7,
+      "repositories": 12,
+      "projects": 0,
+      "stars": 17,
+      "following": 7
+    },
+    {
+      "id": {
+        "name": "syl20bnr"
+      },
+      "followers": 912,
+      "repositories": 161,
+      "projects": 0,
+      "stars": 807,
+      "following": 59
+    },
+    {
+      "id": {
+        "name": "spacemacs",
+        "owner": "syl20bnr"
+      },
+      "stars": 18204,
+      "commits": 7431,
+      "branches": 12,
+      "forks": 612,
+      "closedIssues": 4612,
+      "openIssues": 2269,
+      "projects": 5,
+      "contributors": 558,
+      "releases": 163,
+      "closedPulls": 5535,
+      "openPulls": 176,
+      "watchers": 612
+    },
+    {
+      "id": {
+        "name": "intelli-space",
+        "owner": "MarcoIeni"
+      },
+      "stars": 78,
+      "commits": 112,
+      "branches": 1,
+      "forks": 5,
+      "closedIssues": 2,
+      "openIssues": 0,
+      "projects": 0,
+      "contributors": 1,
+      "releases": 0,
+      "closedPulls": 0,
+      "openPulls": 0,
+      "watchers": 5
+    }
+  ]
+}

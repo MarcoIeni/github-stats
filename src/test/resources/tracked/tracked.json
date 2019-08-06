@@ -1,0 +1,13 @@
+{
+    "users": ["MarcoIeni", "syl20bnr"],
+    "projects": [
+        {
+            "user": "syl20bnr",
+            "project": "spacemacs"
+        },
+        {
+            "user": "MarcoIeni",
+            "project": "intelli-space"
+        }
+    ]
+}
