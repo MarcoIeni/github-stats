@@ -7,15 +7,18 @@ import presentation.GitHubElementViewModel
 import presentation.ProjectViewModel
 import presentation.UserViewModel
 
+fun GitHubElementViewModel.toJson(): String {
+    val jsonGitHubElement = when (this) {
+        is UserViewModel -> JsonUser(this)
+        is ProjectViewModel -> JsonProject(this)
+    }
+    return Gson().toJson(jsonGitHubElement)
+}
+
 class StatsView : StatsChangeListener {
     override fun onStatsChange(newStats: List<GitHubElementViewModel>) {
-        val gson = Gson()
         newStats.forEach {
-            val jsonGitHubElement: JsonGitHubElement = when (it) {
-                is UserViewModel -> JsonUser(it)
-                is ProjectViewModel -> JsonProject(it)
-            }
-            echo(gson.toJson(jsonGitHubElement))
+            echo(it.toJson())
         }
     }
 }

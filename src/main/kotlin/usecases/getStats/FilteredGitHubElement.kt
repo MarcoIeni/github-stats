@@ -5,7 +5,7 @@ import domain.ProjectId
 import domain.UserId
 
 /**
- * This class is called filtered because if the property is not tracked by the
+ * This class is called filtered because if a property is not tracked by the
  * user, then it is null.
  */
 sealed class FilteredGitHubElement {
