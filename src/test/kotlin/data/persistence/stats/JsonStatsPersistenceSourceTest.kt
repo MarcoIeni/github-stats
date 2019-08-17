@@ -1,9 +1,7 @@
 package data.persistence.stats
 
 import data.persistence.PersistenceFilePaths
-import domain.GitHubElementId
-import domain.User
-import domain.UserId
+import domain.*
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
@@ -12,18 +10,71 @@ import org.junit.jupiter.api.TestInstance
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class JsonStatsPersistenceSourceTest {
 
-    private fun createJsonStatsPersistenceRepository(): JsonStatsPersistenceSource =
-        JsonStatsPersistenceSource(
-            PersistenceFilePaths(
-                settings = "",
-                cache = "", // TODO add this
-                tracked = "src/test/resources/tracked/tracked.json"
-            )
+    private val cachedStats = listOf(
+        User(
+            id = UserId("MarcoIeni"),
+            followers = 7,
+            repositories = 12,
+            projects = 0,
+            stars = 17,
+            following = 7
+        ),
+        User(
+            id = UserId("syl20bnr"),
+            followers = 912,
+            repositories = 161,
+            projects = 0,
+            stars = 807,
+            following = 59
+        ),
+        Project(
+            ProjectId(
+                name = "spacemacs",
+                owner = "syl20bnr"
+            ),
+            stars = 18204,
+            commits = 7431,
+            branches = 12,
+            forks = 612,
+            closedIssues = 4612,
+            openIssues = 2269,
+            projects = 5,
+            contributors = 558,
+            releases = 163,
+            closedPulls = 5535,
+            openPulls = 176,
+            watchers = 612
+        ),
+        Project(
+            ProjectId(
+                name = "intelli-space",
+                owner = "MarcoIeni"
+            ),
+            stars = 78,
+            commits = 112,
+            branches = 1,
+            forks = 5,
+            closedIssues = 2,
+            openIssues = 0,
+            projects = 0,
+            contributors = 1,
+            releases = 0,
+            closedPulls = 0,
+            openPulls = 0,
+            watchers = 5
         )
+    )
+
+    private val jsonRepository = JsonStatsPersistenceSource(
+        PersistenceFilePaths(
+            settings = "",
+            cache = "src/test/resources/cache/cache.json",
+            tracked = "src/test/resources/tracked/tracked.json"
+        )
+    )
 
     @Test
     fun readTrackedStatsFile_ConstructProperObject() {
-
         val expectedTrackedStatsObject = TrackedStats(
             users = listOf("MarcoIeni", "syl20bnr"),
             projects = listOf(
@@ -37,70 +88,15 @@ internal class JsonStatsPersistenceSourceTest {
                 )
             )
         )
-        val expectedTrackedStats =  expectedTrackedStatsObject.usersId + expectedTrackedStatsObject.projectsId
-        val jsonRepository = createJsonStatsPersistenceRepository()
+        val expectedTrackedStats = expectedTrackedStatsObject.usersId + expectedTrackedStatsObject.projectsId
         val actualTrackedStats = jsonRepository.trackedStatsIds
         assertEquals(actualTrackedStats, expectedTrackedStats)
     }
 
     @Test
     fun readCachedStatsFile_ConstructProperObject() {
-        val expectedCachedStatsObject = CachedStats(
-            stats = listOf(
-                User(
-                    id = UserId("MarcoIeni"),
-                    followers = 888,
-                repositories = 161,
-            projects = 0,
-        stars = 805,
-        following = 60
-        )
-    ,
-                User(
-                    id = UserId("syl20bnr"),
-                    followers= 888,
-                    repositories= 161,
-                    projects= 0,
-                    stars= 805,
-                    following= 60
-                )
-//                {
-//                    "id": {
-//                    "name": "syl20bnr",
-//                    "owner": "spacemacs"
-//                },
-//                    "stars": 18053,
-//                    "commits": 7431,
-//                    "branches": 12,
-//                    "forks": 4451,
-//                    "closedIssues": 4593,
-//                    "openIssues": 2245,
-//                    "projects": 5,
-//                    "contributors": 557,
-//                    "releases": 163,
-//                    "closedPulls": 5491,
-//                    "openPulls": 174,
-//                    "watchers": 611
-//                },
-//                {
-//                    "id": {
-//                    "name": "MarcoIeni",
-//                    "owner": "intelli-space"
-//                },
-//                    "stars": 18053,
-//                    "commits": 7431,
-//                    "branches": 12,
-//                    "forks": 4451,
-//                    "closedIssues": 4593,
-//                    "openIssues": 2245,
-//                    "projects": 5,
-//                    "contributors": 557,
-//                    "releases": 163,
-//                    "closedPulls": 5491,
-//                    "openPulls": 174,
-//                    "watchers": 611
-//                }
-            )
-        )
+        val expectedCachedStats = cachedStats
+        val actualCachedStats = jsonRepository.cachedStats
+        assertEquals(actualCachedStats, expectedCachedStats)
     }
 }

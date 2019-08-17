@@ -5,24 +5,37 @@ import com.google.gson.GsonBuilder
 import data.persistence.PersistenceFilePaths
 import domain.GitHubElement
 import domain.GitHubElementId
-import domain.ProjectId
-import domain.UserId
 import repositories.StatsPersistenceSource
 import java.io.File
+import com.google.gson.JsonParser
+import domain.Project
+import domain.User
+
 
 class JsonStatsPersistenceSource(private val persistenceFilePaths: PersistenceFilePaths): StatsPersistenceSource {
     override var cachedStats: List<GitHubElement>
         get() {
             val cachedStatsFile = File(persistenceFilePaths.cache)
             val cachedStatsJson: String = cachedStatsFile.readText()
-            val cached = Gson().fromJson(cachedStatsJson, CachedStats::class.java)
-            return cached.stats
+
+            val jsonObject = JsonParser().parse(cachedStatsJson).asJsonObject
+            val stats = jsonObject.get("stats").asJsonArray;
+
+            return stats.map {
+                val isStatProject = it.asJsonObject.has("forks")
+                if (isStatProject) {
+                    Gson().fromJson(it, Project::class.java)
+                }
+                else {
+                    Gson().fromJson(it, User::class.java)
+                }
+            }
         }
         set(value) {
             val cached = CachedStats(value)
             val gson: Gson = GsonBuilder().setPrettyPrinting().create()
             val cachedStatsJson: String = gson.toJson(cached)
-            File("data/cache.json").writeText(cachedStatsJson)
+            File(persistenceFilePaths.cache).writeText(cachedStatsJson)
         }
 
     override val trackedStatsIds: List<GitHubElementId>
