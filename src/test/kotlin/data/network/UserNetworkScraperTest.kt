@@ -15,7 +15,7 @@ internal class UserNetworkScraperTest {
         val userId = UserId("syl20bnr")
         val expectedUser = User(
             id = userId,
-            followers = 912,
+            followers = 915,
             repositories = 161,
             projects = 0,
             stars = 808,

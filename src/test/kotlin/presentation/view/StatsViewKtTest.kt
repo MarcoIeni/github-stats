@@ -18,7 +18,7 @@ internal class StatsViewKtTest {
     @Test
     fun filteredProject_buildCorrectJsonString() {
         val filteredProject = FilteredProject(
-            id = ProjectId(name = "projName", owner = "projectOwner"),
+            id = ProjectId(name = "projectName", owner = "projectOwner"),
             stars = 1,
             commits = 2,
             branches = 3,
@@ -37,7 +37,7 @@ internal class StatsViewKtTest {
         val indentedJsonString =
             """
                 {
-                    "repository":"projectOwner/projName",
+                    "repository":"projectOwner/projectName",
                     "stars":1,
                     "commits":2,
                     "branches":3,
