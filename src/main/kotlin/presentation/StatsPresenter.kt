@@ -1,8 +1,5 @@
 package presentation
 
-import domain.GitHubElement
-import domain.Project
-import domain.User
 import usecases.getStats.FilteredGitHubElement
 import usecases.getStats.FilteredProject
 import usecases.getStats.FilteredUser
