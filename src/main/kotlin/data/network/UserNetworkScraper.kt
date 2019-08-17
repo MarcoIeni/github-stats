@@ -14,7 +14,7 @@ class UserNetworkScraper (
         return scrapeUserFromUserPage(userPage)
     }
 
-    protected fun scrapeUserFromUserPage(userPage: Document): User =
+    internal fun scrapeUserFromUserPage(userPage: Document): User =
         userPage.run {
             val stats = select("nav[aria-label=\"User profile\"] span")
             val statsValues = getIntValuesFromJsoupElementList(stats)

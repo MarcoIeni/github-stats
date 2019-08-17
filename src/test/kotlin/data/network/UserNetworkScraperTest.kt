@@ -15,15 +15,15 @@ internal class UserNetworkScraperTest {
         val userId = UserId("syl20bnr")
         val expectedUser = User(
             id = userId,
-            followers = 915,
+            followers = 888,
             repositories = 161,
             projects = 0,
-            stars = 808,
-            following = 59
+            stars = 805,
+            following = 60
         )
         val input = File("src/test/resources/html/user/syl20bnr.html")
         val userPage = Jsoup.parse(input, "UTF-8")
-        val actualUser = UserNetworkScraper(userId).scrape()
+        val actualUser = UserNetworkScraper(userId).scrapeUserFromUserPage(userPage)
         assertEquals(actualUser, expectedUser)
     }
 }
