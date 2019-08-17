@@ -13,36 +13,33 @@ class StatsRepository(
     private var areStatsUpdating: Boolean = false
 
     val stats: List<GitHubElement>
-        get() {
-            @Synchronized fun updateStats(newStats: List<GitHubElement>) {
-                if (!areStatsUpdating) {
-                    areStatsUpdating = true
-                    GlobalScope.launch {
-                        statsPersistenceSource.cachedStats = newStats
-                        areStatsUpdating = false
-                    }
-                }
-            }
-
-            fun getNewStats(): List<GitHubElement> {
-                val trackedStatsIds = statsPersistenceSource.trackedStatsIds
-                println(trackedStatsIds)
-                val newStats = runBlocking {
-                    return@runBlocking statsNetworkSource.getStatList(trackedStatsIds)
-                }
-                updateStats(newStats)
-                return newStats
-            }
-
-            return if (settingsRepository.isCacheValid(settingsRepository.cacheExpiryTime)) {
+        get() =
+            if (settingsRepository.isCacheValid(settingsRepository.cacheExpiryTime)) {
                 statsPersistenceSource.cachedStats
             } else {
                 getNewStats()
             }
 
+    fun getNewStats(): List<GitHubElement> {
+        val trackedStatsIds = statsPersistenceSource.trackedStatsIds
+        println(trackedStatsIds)
+        val newStats = runBlocking {
+            return@runBlocking statsNetworkSource.getStatList(trackedStatsIds)
         }
+        updateStats(newStats)
+        return newStats
+    }
 
-
+    @Synchronized
+    fun updateStats(newStats: List<GitHubElement>) {
+        if (!areStatsUpdating) {
+            areStatsUpdating = true
+            GlobalScope.launch {
+                statsPersistenceSource.cachedStats = newStats
+                areStatsUpdating = false
+            }
+        }
+    }
 }
 
 interface StatsPersistenceSource {
