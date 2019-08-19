@@ -1,0 +1,49 @@
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.3.30'
+    id 'application'
+}
+
+application {
+    mainClassName = "MainKt"
+}
+
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
+    implementation 'com.github.ajalt:clikt:1.7.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation "io.ktor:ktor-client-apache:$ktor_version"
+    implementation "io.ktor:ktor-client:$ktor_version"
+    implementation 'org.kodein.di:kodein-di-generic-jvm:6.2.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.1.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.1.1'
+}
+
+compileKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+compileTestKotlin {
+    kotlinOptions.jvmTarget = "1.8"
+}
+
+jar {
+    baseName = 'github-stats'
+    version =  '1.0'
+}
+
+dependencies {
+    compile 'org.jsoup:jsoup:1.12.1'
+    testImplementation "io.mockk:mockk:1.9.3"
+}
+
+test {
+    useJUnitPlatform()
+}
+
