@@ -77,37 +77,35 @@ internal class GetStatsTest {
         )
 
         getStats()
-
     }
 
     class GetStatsOutputValidator : GetStatsOutput {
-        val expectedStats = listOf(
-            FilteredProject(
-                id = ProjectId(name = "projectName", owner = "projectOwner"),
-                stars = 1,
-                commits = 2,
-                branches = 3,
-                forks = 4,
-                closedIssues = 5,
-                openIssues = 6,
-                projects = 7,
-                contributors = 8,
-                releases = 9,
-                closedPulls = 10,
-                openPulls = null,
-                watchers = 11
-            ),
-            FilteredUser(
-                id = UserId("name"),
-                followers = 1,
-                repositories = 2,
-                projects = 3,
-                stars = 4,
-                following = null
-            )
-        )
-
         override fun presentStats(stats: List<FilteredGitHubElement>) {
+            val expectedStats = listOf(
+                FilteredProject(
+                    id = ProjectId(name = "projectName", owner = "projectOwner"),
+                    stars = 1,
+                    commits = 2,
+                    branches = 3,
+                    forks = 4,
+                    closedIssues = 5,
+                    openIssues = 6,
+                    projects = 7,
+                    contributors = 8,
+                    releases = 9,
+                    closedPulls = 10,
+                    openPulls = null,
+                    watchers = 11
+                ),
+                FilteredUser(
+                    id = UserId("name"),
+                    followers = 1,
+                    repositories = 2,
+                    projects = 3,
+                    stars = 4,
+                    following = null
+                )
+            )
             assertEquals(stats, expectedStats)
         }
     }
