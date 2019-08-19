@@ -1,8 +1,4 @@
-package repositories
-
-import data.persistence.settings.ProjectProperties
-import data.persistence.settings.Settings
-import data.persistence.settings.UserProperties
+package repositories.settings
 
 interface SettingsRepository {
 

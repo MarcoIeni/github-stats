@@ -1,4 +1,4 @@
-package data.persistence.settings
+package repositories.settings
 
 /**
  * Project properties that you want to track

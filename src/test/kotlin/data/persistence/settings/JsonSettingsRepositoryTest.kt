@@ -1,11 +1,12 @@
 package data.persistence.settings
 
 import data.persistence.PersistenceFilePaths
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
+import repositories.settings.ProjectProperties
+import repositories.settings.Settings
+import repositories.settings.UserProperties
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class JsonSettingsRepositoryTest {

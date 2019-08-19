@@ -1,10 +1,10 @@
 package usecases.getStats
 
-import data.persistence.settings.ProjectProperties
-import data.persistence.settings.UserProperties
+import repositories.settings.ProjectProperties
+import repositories.settings.UserProperties
 import domain.Project
 import domain.User
-import repositories.SettingsRepository
+import repositories.settings.SettingsRepository
 import repositories.StatsRepository
 
 class GetStats(

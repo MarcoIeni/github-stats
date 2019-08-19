@@ -4,6 +4,7 @@ import kotlinx.coroutines.*
 
 import domain.GitHubElement
 import domain.GitHubElementId
+import repositories.settings.SettingsRepository
 
 class StatsRepository(
     private val statsPersistenceSource: StatsPersistenceSource,

@@ -1,4 +1,4 @@
-package data.persistence.settings
+package repositories.settings
 
 /**
  * User properties that you want to track

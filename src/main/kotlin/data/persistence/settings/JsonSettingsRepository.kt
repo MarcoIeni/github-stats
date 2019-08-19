@@ -2,10 +2,12 @@ package data.persistence.settings
 
 import com.google.gson.Gson
 import data.persistence.PersistenceFilePaths
-import repositories.SettingsRepository
+import repositories.settings.Settings
+import repositories.settings.SettingsRepository
 import java.io.File
 
-class JsonSettingsRepository(private val persistenceFilePaths: PersistenceFilePaths) : SettingsRepository {
+class JsonSettingsRepository(private val persistenceFilePaths: PersistenceFilePaths) :
+    SettingsRepository {
     override val settings: Settings
         get() {
             val settingsFile = File(persistenceFilePaths.settings)

@@ -11,7 +11,7 @@ import org.kodein.di.generic.singleton
 import presentation.StatsChangeListener
 import presentation.StatsPresenter
 import presentation.view.StatsView
-import repositories.SettingsRepository
+import repositories.settings.SettingsRepository
 import repositories.StatsNetworkSource
 import repositories.StatsPersistenceSource
 import repositories.StatsRepository

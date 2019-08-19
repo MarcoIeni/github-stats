@@ -1,4 +1,4 @@
-package data.persistence.settings
+package repositories.settings
 
 data class Settings (
     val cacheExpiryTime: Int,
