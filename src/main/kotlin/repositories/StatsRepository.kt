@@ -20,7 +20,7 @@ class StatsRepository(
                 getNewStats()
             }
 
-    fun getNewStats(): List<GitHubElement> {
+    private fun getNewStats(): List<GitHubElement> {
         val trackedStatsIds = statsPersistenceSource.trackedStatsIds
         println(trackedStatsIds)
         val newStats = runBlocking {
