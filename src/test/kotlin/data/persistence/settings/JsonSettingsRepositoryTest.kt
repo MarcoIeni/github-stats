@@ -40,9 +40,7 @@ internal class JsonSettingsRepositoryTest {
 
         val jsonRepository = JsonSettingsRepository(
             PersistenceFilePaths(
-                settings = "src/test/resources/settings/valid_settings.json",
-                cache = "",
-                tracked = ""
+                settings = "src/test/resources/settings/valid_settings.json"
             )
         )
 

@@ -68,7 +68,6 @@ internal class JsonStatsPersistenceSourceTest {
 
     private val jsonRepository = JsonStatsPersistenceSource(
         PersistenceFilePaths(
-            settings = "",
             cache = "src/test/resources/cache/cache.json",
             tracked = "src/test/resources/tracked/tracked.json"
         )
@@ -106,9 +105,7 @@ internal class JsonStatsPersistenceSourceTest {
         val writtenCacheFilePath = "src/test/resources/cache/writtenCache.json"
         val testJsonRepository = JsonStatsPersistenceSource(
             PersistenceFilePaths(
-                settings = "",
-                cache = writtenCacheFilePath,
-                tracked = ""
+                cache = writtenCacheFilePath
             )
         )
         testJsonRepository.cachedStats = cachedStats
