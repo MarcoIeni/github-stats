@@ -11,15 +11,6 @@ import repositories.settings.UserProperties
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class JsonSettingsRepositoryTest {
 
-    private fun createJsonSettingsRepository(): JsonSettingsRepository =
-        JsonSettingsRepository(
-            PersistenceFilePaths(
-                settings = "src/test/resources/settings/valid_settings.json",
-                cache = "",
-                tracked = ""
-            )
-        )
-
     @Test
     fun readSettingsFile_ConstructProperObject() {
         val expectedSettings = Settings(
@@ -46,7 +37,15 @@ internal class JsonSettingsRepositoryTest {
                 following = true
             )
         )
-        val jsonRepository = createJsonSettingsRepository()
+
+        val jsonRepository = JsonSettingsRepository(
+            PersistenceFilePaths(
+                settings = "src/test/resources/settings/valid_settings.json",
+                cache = "",
+                tracked = ""
+            )
+        )
+
         val actualSettings = jsonRepository.settings
         assertEquals(actualSettings, expectedSettings)
     }
