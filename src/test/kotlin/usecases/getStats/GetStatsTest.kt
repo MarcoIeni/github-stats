@@ -1,5 +1,7 @@
 package usecases.getStats
 
+import data.persistence.PersistenceFilePaths
+import data.persistence.settings.JsonSettingsRepository
 import repositories.settings.ProjectProperties
 import repositories.settings.UserProperties
 import domain.Project
@@ -18,7 +20,11 @@ internal class GetStatsTest {
     @Test
     fun getStats_returnProperFilteredStats() {
         val statsRepository = mockk<StatsRepository>()
-        val settingsRepository = mockk<SettingsRepository>()
+        val settingsRepository = JsonSettingsRepository(
+            PersistenceFilePaths(
+                settings = "src/test/resources/settings/get_stats_test_settings.json"
+            )
+        )
 
         every { statsRepository.stats } returns listOf(
             Project(
@@ -44,29 +50,6 @@ internal class GetStatsTest {
                 stars = 4,
                 following = 5
             )
-        )
-
-        every { settingsRepository.trackedProjectProperties } returns ProjectProperties(
-            stars = true,
-            commits = true,
-            branches = true,
-            forks = true,
-            closedIssues = true,
-            openIssues = true,
-            projects = true,
-            contributors = true,
-            releases = true,
-            closedPulls = true,
-            openPulls = false,
-            watchers = true
-        )
-
-        every { settingsRepository.trackedUserProperties } returns UserProperties(
-            followers = true,
-            repositories = true,
-            projects = true,
-            stars = true,
-            following = false
         )
 
         val getStats = GetStats(
