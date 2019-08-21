@@ -15,12 +15,12 @@ class StatsPresenter(statsChangeListener: StatsChangeListener) : GetStatsOutput 
 
     var stats: List<GitHubElementViewModel> by Delegates.observable(
         initialValue = emptyList(),
-        onChange = { prop, old, new ->
+        onChange = { _, _, new ->
             statsChangeListener.onStatsChange(new)
         })
 
-    override fun presentStats(elements: List<FilteredGitHubElement>) {
-        stats = elements.map { it.toViewModel() }
+    override fun presentStats(stats: List<FilteredGitHubElement>) {
+        this.stats = stats.map { it.toViewModel() }
     }
 
 }
