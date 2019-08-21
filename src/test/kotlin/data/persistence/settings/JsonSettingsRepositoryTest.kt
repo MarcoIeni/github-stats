@@ -12,39 +12,78 @@ import repositories.settings.UserProperties
 import java.io.File
 import java.time.LocalDateTime
 
+const val CACHE_EXP_TIME_10_FILEPATH = "src/test/resources/settings/cache_exp_time_10.json"
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class JsonSettingsRepositoryTest {
+
+    private fun getTimeStampString(time: LocalDateTime) = """
+              "timestamp": {
+                "date": {
+                  "year": ${time.year},
+                  "month": ${time.monthValue},
+                  "day": ${time.dayOfMonth}
+                },
+                "time": {
+                  "hour": ${time.hour},
+                  "minute": ${time.minute},
+                  "second": ${time.second},
+                  "nano": ${time.nano}
+                }
+              }
+        """.trimIndent()
+
+    @Test
+    fun checkExpiredCache_isNotValid() {
+        val expiredCacheFilepath = "src/test/resources/cache/expiredCache.json"
+        val now = LocalDateTime.now()
+        val timestampString = getTimeStampString(now)
+        val expiredCacheFileContent = """
+            {
+                $timestampString
+                "stats": []
+            }
+        """.trimIndent()
+        val expiredCacheFile = File(expiredCacheFilepath)
+        expiredCacheFile.writeText(expiredCacheFileContent)
+        val settingsRepository = JsonSettingsRepository(
+            PersistenceFilePaths(
+                cache = expiredCacheFilepath,
+                settings = CACHE_EXP_TIME_10_FILEPATH
+            )
+        )
+        val elevenSecondsFromNow = now.plusSeconds(11)
+        val isCacheValid = settingsRepository.isCacheValid(elevenSecondsFromNow)
+
+        // cache expiry time is 10 seconds and 11 seconds have passed
+        // since cache was saved, so the cache should be not valid
+        assert(!isCacheValid)
+
+        expiredCacheFile.delete()
+    }
 
     @Test
     fun checkRecentlyCreatedCache_isValid() {
         val recentCacheFilepath = "src/test/resources/cache/recentCache.json"
         val now = LocalDateTime.now()
+        val timestampString = getTimeStampString(now)
         val recentCacheFileContent = """
             {
-              "timestamp": {
-                "date": {
-                  "year": ${now.year},
-                  "month": ${now.monthValue},
-                  "day": ${now.dayOfMonth}
-                },
-                "time": {
-                  "hour": ${now.hour},
-                  "minute": ${now.minute},
-                  "second": ${now.second},
-                  "nano": ${now.nano}
-                }
-              },
-              "stats": []
+                $timestampString
+                "stats": []
             }
         """.trimIndent()
         val recentCacheFile = File(recentCacheFilepath)
         recentCacheFile.writeText(recentCacheFileContent)
-        val settingsRepository = JsonSettingsRepository(PersistenceFilePaths(
-            cache = recentCacheFilepath,
-            settings = "src/test/resources/settings/cache_exp_time_10.json"
-        ))
+        val settingsRepository = JsonSettingsRepository(
+            PersistenceFilePaths(
+                cache = recentCacheFilepath,
+                settings = CACHE_EXP_TIME_10_FILEPATH
+            )
+        )
         val fiveSecondsFromNow = now.plusSeconds(5)
         val isCacheValid = settingsRepository.isCacheValid(fiveSecondsFromNow)
+
         // cache expiry time is 10 seconds and only 5 seconds have passed
         // since cache was saved, so the cache should be still valid
         assert(isCacheValid)
