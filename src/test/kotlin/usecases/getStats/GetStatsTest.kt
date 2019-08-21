@@ -2,8 +2,6 @@ package usecases.getStats
 
 import data.persistence.PersistenceFilePaths
 import data.persistence.settings.JsonSettingsRepository
-import repositories.settings.ProjectProperties
-import repositories.settings.UserProperties
 import domain.Project
 import domain.ProjectId
 import domain.User
@@ -12,7 +10,6 @@ import io.mockk.every
 import io.mockk.mockk
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import repositories.settings.SettingsRepository
 import repositories.StatsRepository
 
 internal class GetStatsTest {
