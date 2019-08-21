@@ -59,7 +59,6 @@ class GetStats(
             following = getFilteredProperty(userProperties.following, user.following) as Int?
         )
     }
-
 }
 
 interface GetStatsOutput {
