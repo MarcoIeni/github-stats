@@ -13,15 +13,15 @@ import domain.User
 
 
 class JsonStatsPersistenceSource(private val persistenceFilePaths: PersistenceFilePaths): StatsPersistenceSource {
-    override var cachedStats: List<GitHubElement>
+    override var cachedStats: CachedStats
         get() {
             val cachedStatsFile = File(persistenceFilePaths.cache)
             val cachedStatsJson: String = cachedStatsFile.readText()
 
             val jsonObject = JsonParser().parse(cachedStatsJson).asJsonObject
-            val stats = jsonObject.get("stats").asJsonArray;
+            val jsonStats = jsonObject.get("stats").asJsonArray;
 
-            return stats.map {
+            val stats = jsonStats.map {
                 val isStatProject = it.asJsonObject.has("forks")
                 if (isStatProject) {
                     Gson().fromJson(it, Project::class.java)
@@ -30,11 +30,11 @@ class JsonStatsPersistenceSource(private val persistenceFilePaths: PersistenceFi
                     Gson().fromJson(it, User::class.java)
                 }
             }
+            return CachedStats(stats)
         }
         set(value) {
-            val cached = CachedStats(value)
             val gson: Gson = GsonBuilder().setPrettyPrinting().create()
-            val cachedStatsJson: String = gson.toJson(cached)
+            val cachedStatsJson: String = gson.toJson(value)
             File(persistenceFilePaths.cache).writeText(cachedStatsJson)
         }
 

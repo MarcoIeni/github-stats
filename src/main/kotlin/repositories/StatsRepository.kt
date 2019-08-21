@@ -1,10 +1,12 @@
 package repositories
 
+import data.persistence.stats.CachedStats
 import kotlinx.coroutines.*
 
 import domain.GitHubElement
 import domain.GitHubElementId
 import repositories.settings.SettingsRepository
+import sun.misc.Cache
 
 class StatsRepository(
     private val statsPersistenceSource: StatsPersistenceSource,
@@ -15,8 +17,8 @@ class StatsRepository(
 
     val stats: List<GitHubElement>
         get() =
-            if (settingsRepository.isCacheValid(settingsRepository.cacheExpiryTime)) {
-                statsPersistenceSource.cachedStats
+            if (settingsRepository.isCacheValid()) {
+                statsPersistenceSource.cachedStats.stats
             } else {
                 getNewStats()
             }
@@ -36,7 +38,7 @@ class StatsRepository(
         if (!areStatsUpdating) {
             areStatsUpdating = true
             GlobalScope.launch {
-                statsPersistenceSource.cachedStats = newStats
+                statsPersistenceSource.cachedStats = CachedStats(newStats)
                 areStatsUpdating = false
             }
         }
@@ -45,7 +47,7 @@ class StatsRepository(
 
 interface StatsPersistenceSource {
     val trackedStatsIds: List<GitHubElementId>
-    var cachedStats: List<GitHubElement>
+    var cachedStats: CachedStats
 
 }
 

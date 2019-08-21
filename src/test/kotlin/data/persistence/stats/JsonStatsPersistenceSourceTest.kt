@@ -11,58 +11,60 @@ import java.io.File
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 internal class JsonStatsPersistenceSourceTest {
 
-    private val cachedStats = listOf(
-        User(
-            id = UserId("MarcoIeni"),
-            followers = 7,
-            repositories = 12,
-            projects = 0,
-            stars = 17,
-            following = 7
-        ),
-        User(
-            id = UserId("syl20bnr"),
-            followers = 912,
-            repositories = 161,
-            projects = 0,
-            stars = 807,
-            following = 59
-        ),
-        Project(
-            ProjectId(
-                name = "spacemacs",
-                owner = "syl20bnr"
+    private val cachedStats = CachedStats(
+        listOf(
+            User(
+                id = UserId("MarcoIeni"),
+                followers = 7,
+                repositories = 12,
+                projects = 0,
+                stars = 17,
+                following = 7
             ),
-            stars = 18204,
-            commits = 7431,
-            branches = 12,
-            forks = 612,
-            closedIssues = 4612,
-            openIssues = 2269,
-            projects = 5,
-            contributors = 558,
-            releases = 163,
-            closedPulls = 5535,
-            openPulls = 176,
-            watchers = 612
-        ),
-        Project(
-            ProjectId(
-                name = "intelli-space",
-                owner = "MarcoIeni"
+            User(
+                id = UserId("syl20bnr"),
+                followers = 912,
+                repositories = 161,
+                projects = 0,
+                stars = 807,
+                following = 59
             ),
-            stars = 78,
-            commits = 112,
-            branches = 1,
-            forks = 5,
-            closedIssues = 2,
-            openIssues = 0,
-            projects = 0,
-            contributors = 1,
-            releases = 0,
-            closedPulls = 0,
-            openPulls = 0,
-            watchers = 5
+            Project(
+                ProjectId(
+                    name = "spacemacs",
+                    owner = "syl20bnr"
+                ),
+                stars = 18204,
+                commits = 7431,
+                branches = 12,
+                forks = 612,
+                closedIssues = 4612,
+                openIssues = 2269,
+                projects = 5,
+                contributors = 558,
+                releases = 163,
+                closedPulls = 5535,
+                openPulls = 176,
+                watchers = 612
+            ),
+            Project(
+                ProjectId(
+                    name = "intelli-space",
+                    owner = "MarcoIeni"
+                ),
+                stars = 78,
+                commits = 112,
+                branches = 1,
+                forks = 5,
+                closedIssues = 2,
+                openIssues = 0,
+                projects = 0,
+                contributors = 1,
+                releases = 0,
+                closedPulls = 0,
+                openPulls = 0,
+                watchers = 5
+            )
         )
     )
 
@@ -109,71 +111,98 @@ internal class JsonStatsPersistenceSourceTest {
             )
         )
         testJsonRepository.cachedStats = cachedStats
-        val expectedFileContent = """
-{
-  "stats": [
-    {
-      "id": {
-        "name": "MarcoIeni"
-      },
-      "followers": 7,
-      "repositories": 12,
-      "projects": 0,
-      "stars": 17,
-      "following": 7
-    },
-    {
-      "id": {
-        "name": "syl20bnr"
-      },
-      "followers": 912,
-      "repositories": 161,
-      "projects": 0,
-      "stars": 807,
-      "following": 59
-    },
-    {
-      "id": {
-        "name": "spacemacs",
-        "owner": "syl20bnr"
-      },
-      "stars": 18204,
-      "commits": 7431,
-      "branches": 12,
-      "forks": 612,
-      "closedIssues": 4612,
-      "openIssues": 2269,
-      "projects": 5,
-      "contributors": 558,
-      "releases": 163,
-      "closedPulls": 5535,
-      "openPulls": 176,
-      "watchers": 612
-    },
-    {
-      "id": {
-        "name": "intelli-space",
-        "owner": "MarcoIeni"
-      },
-      "stars": 78,
-      "commits": 112,
-      "branches": 1,
-      "forks": 5,
-      "closedIssues": 2,
-      "openIssues": 0,
-      "projects": 0,
-      "contributors": 1,
-      "releases": 0,
-      "closedPulls": 0,
-      "openPulls": 0,
-      "watchers": 5
-    }
-  ]
-}
+        val timestamp = cachedStats.timestamp
+        val expectedTimestampString = """
+            "timestamp": {
+              "date": {
+                "year": ${timestamp.year},
+                "month": ${timestamp.monthValue},
+                "day": ${timestamp.dayOfMonth}
+              },
+              "time": {
+                "hour": ${timestamp.hour},
+                "minute": ${timestamp.minute},
+                "second": ${timestamp.second},
+                "nano": ${timestamp.nano}
+              }
+            },
         """.trimIndent()
+
+        val expectedStatsString = """
+            "stats": [
+              {
+                "id": {
+                  "name": "MarcoIeni"
+                },
+                "followers": 7,
+                "repositories": 12,
+                "projects": 0,
+                "stars": 17,
+                "following": 7
+              },
+              {
+                "id": {
+                  "name": "syl20bnr"
+                },
+                "followers": 912,
+                "repositories": 161,
+                "projects": 0,
+                "stars": 807,
+                "following": 59
+              },
+              {
+                "id": {
+                  "name": "spacemacs",
+                  "owner": "syl20bnr"
+                },
+                "stars": 18204,
+                "commits": 7431,
+                "branches": 12,
+                "forks": 612,
+                "closedIssues": 4612,
+                "openIssues": 2269,
+                "projects": 5,
+                "contributors": 558,
+                "releases": 163,
+                "closedPulls": 5535,
+                "openPulls": 176,
+                "watchers": 612
+              },
+              {
+                "id": {
+                  "name": "intelli-space",
+                  "owner": "MarcoIeni"
+                },
+                "stars": 78,
+                "commits": 112,
+                "branches": 1,
+                "forks": 5,
+                "closedIssues": 2,
+                "openIssues": 0,
+                "projects": 0,
+                "contributors": 1,
+                "releases": 0,
+                "closedPulls": 0,
+                "openPulls": 0,
+                "watchers": 5
+              }
+            ]
+        """.trimIndent()
+
+        val expectedFileContent = """
+            {
+            $expectedTimestampString
+            $expectedStatsString
+            }
+        """.trimIndent()
+
         val actualFile = File(writtenCacheFilePath)
         val actualFileContent: String = actualFile.readText()
-        actualFile.delete()
-        assertEquals(actualFileContent, expectedFileContent)
+
+        //remove tabs, spaces and new lines
+        val expectedJsonString = expectedFileContent.replace("\\s".toRegex(), "")
+        val actualJsonString = actualFileContent.replace("\\s".toRegex(), "")
+
+        assertEquals(expectedJsonString, actualJsonString)
     }
 }
