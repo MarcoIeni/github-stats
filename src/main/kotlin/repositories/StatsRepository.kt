@@ -17,7 +17,7 @@ class StatsRepository(
 
     val stats: List<GitHubElement>
         get() =
-            if (settingsRepository.isCacheValid()) {
+            if (settingsRepository.isCacheValid(statsPersistenceSource.cachedStats.timestamp)) {
                 statsPersistenceSource.cachedStats.stats
             } else {
                 getNewStats()

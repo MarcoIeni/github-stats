@@ -1,5 +1,8 @@
 package repositories.settings
 
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
+
 interface SettingsRepository {
 
     val settings: Settings
@@ -13,6 +16,10 @@ interface SettingsRepository {
     val trackedUserProperties: UserProperties
         get() = settings.userProperties
 
-    fun isCacheValid(cacheExpiryTime: Int): Boolean =
-        false // TODO("if (now - timeWhenDataWereSaved < [cacheExpiryTime]) true else false")
+    fun isCacheValid(cacheTimestamp: LocalDateTime): Boolean {
+        val now = LocalDateTime.now()
+        val timeDifference: Long = ChronoUnit.SECONDS.between(now, cacheTimestamp)
+        println(cacheExpiryTime)
+        return timeDifference < cacheExpiryTime
+    }
 }
