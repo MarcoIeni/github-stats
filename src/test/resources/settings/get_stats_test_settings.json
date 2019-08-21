@@ -1,0 +1,26 @@
+{
+  "cacheExpiryTime": 5,
+
+  "userProperties": {
+    "followers": true,
+    "repositories": true,
+    "projects": true,
+    "stars": true,
+    "following": false
+  },
+
+  "projectProperties": {
+    "stars": true,
+    "commits": true,
+    "branches": true,
+    "forks": true,
+    "closedIssues": true,
+    "openIssues": true,
+    "projects": true,
+    "contributors": true,
+    "releases": true,
+    "closedPulls": true,
+    "openPulls": false,
+    "watchers": true
+  }
+}
