@@ -204,5 +204,7 @@ internal class JsonStatsPersistenceSourceTest {
         val actualJsonString = actualFileContent.replace("\\s".toRegex(), "")
 
         assertEquals(expectedJsonString, actualJsonString)
+
+        actualFile.delete()
     }
 }
