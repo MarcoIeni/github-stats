@@ -1,4 +1,17 @@
 {
+  "timestamp": {
+    "date": {
+      "year": 2019,
+      "month": 8,
+      "day": 24
+    },
+    "time": {
+      "hour": 20,
+      "minute": 53,
+      "second": 3,
+      "nano": 273000000
+    }
+  },
   "stats": [
     {
       "id": {
