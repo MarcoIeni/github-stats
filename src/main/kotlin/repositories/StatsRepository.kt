@@ -6,22 +6,28 @@ import kotlinx.coroutines.*
 import domain.GitHubElement
 import domain.GitHubElementId
 import repositories.settings.SettingsRepository
-import sun.misc.Cache
+import java.lang.Exception
+import java.net.UnknownHostException
 
 class StatsRepository(
     private val statsPersistenceSource: StatsPersistenceSource,
     private val settingsRepository: SettingsRepository,
     private val statsNetworkSource: StatsNetworkSource
 ) {
-    private var areStatsUpdating: Boolean = false
+    private lateinit var job: Job
 
-    val stats: List<GitHubElement>
-        get() =
-            if (settingsRepository.isCacheValid(statsPersistenceSource.cachedStats.timestamp)) {
-                statsPersistenceSource.cachedStats.stats
-            } else {
+    val stats: List<GitHubElement> =
+        if (settingsRepository.isCacheValid(statsPersistenceSource.cachedStats.timestamp)) {
+            statsPersistenceSource.cachedStats.stats
+        } else {
+            try {
                 getNewStats()
+            } catch (e: Exception) {
+                println(e)
+                println("No/slow connection. Getting cached stats")
+                statsPersistenceSource.cachedStats.stats
             }
+        }
 
     private fun getNewStats(): List<GitHubElement> {
         val trackedStatsIds = statsPersistenceSource.trackedStatsIds
@@ -34,13 +40,15 @@ class StatsRepository(
     }
 
     @Synchronized
-    fun updateStats(newStats: List<GitHubElement>) {
-        if (!areStatsUpdating) {
-            areStatsUpdating = true
-            GlobalScope.launch {
-                statsPersistenceSource.cachedStats = CachedStats(newStats)
-                areStatsUpdating = false
+    private fun updateStats(newStats: List<GitHubElement>) {
+        // block previous update because it is no longer required
+        if (::job.isInitialized){
+            runBlocking {
+                job.cancelAndJoin()
             }
+        }
+        job = GlobalScope.launch {
+            statsPersistenceSource.cachedStats = CachedStats(newStats)
         }
     }
 }
