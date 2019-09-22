@@ -27,10 +27,10 @@
       "id": {
         "name": "syl20bnr"
       },
-      "followers": 912,
+      "followers": 916,
       "repositories": 161,
       "projects": 0,
-      "stars": 807,
+      "stars": 806,
       "following": 59
     },
     {
@@ -38,28 +38,28 @@
         "name": "spacemacs",
         "owner": "syl20bnr"
       },
-      "stars": 18204,
-      "commits": 7431,
+      "stars": 18318,
+      "commits": 7435,
       "branches": 12,
-      "forks": 612,
-      "closedIssues": 4612,
-      "openIssues": 2269,
+      "forks": 4510,
+      "closedIssues": 4635,
+      "openIssues": 2279,
       "projects": 5,
-      "contributors": 558,
+      "contributors": 557,
       "releases": 163,
-      "closedPulls": 5535,
-      "openPulls": 176,
-      "watchers": 612
+      "closedPulls": 5566,
+      "openPulls": 171,
+      "watchers": 610
     },
     {
       "id": {
         "name": "intelli-space",
         "owner": "MarcoIeni"
       },
-      "stars": 78,
+      "stars": 86,
       "commits": 112,
       "branches": 1,
-      "forks": 5,
+      "forks": 12,
       "closedIssues": 2,
       "openIssues": 0,
       "projects": 0,
@@ -67,7 +67,7 @@
       "releases": 0,
       "closedPulls": 0,
       "openPulls": 0,
-      "watchers": 5
+      "watchers": 6
     }
   ]
 }
