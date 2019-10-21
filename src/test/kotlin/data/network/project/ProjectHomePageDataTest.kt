@@ -19,8 +19,6 @@ internal class ProjectHomePageDataTest {
             projects = 5,
             commits = 7431,
             branches = 12,
-            releases = 163,
-            contributors = 558,
             watchers = 612,
             forks = 4489,
             stars = 18204

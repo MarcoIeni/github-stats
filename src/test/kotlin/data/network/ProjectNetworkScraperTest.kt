@@ -24,8 +24,6 @@ internal class ProjectNetworkScraperTest {
             forks = 4,
             openIssues = 5,
             projects = 6,
-            contributors = 7,
-            releases = 8,
             openPulls = 9,
             watchers = 10,
             closedIssues = 11,
@@ -40,8 +38,6 @@ internal class ProjectNetworkScraperTest {
                 forks = 4,
                 openIssues = 5,
                 projects = 6,
-                contributors = 7,
-                releases = 8,
                 openPulls = 9,
                 watchers = 10
             ),

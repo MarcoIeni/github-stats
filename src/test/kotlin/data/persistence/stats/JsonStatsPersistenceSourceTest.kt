@@ -41,8 +41,6 @@ internal class JsonStatsPersistenceSourceTest {
                 closedIssues = 4612,
                 openIssues = 2269,
                 projects = 5,
-                contributors = 558,
-                releases = 163,
                 closedPulls = 5535,
                 openPulls = 176,
                 watchers = 612
@@ -59,8 +57,6 @@ internal class JsonStatsPersistenceSourceTest {
                 closedIssues = 2,
                 openIssues = 0,
                 projects = 0,
-                contributors = 1,
-                releases = 0,
                 closedPulls = 0,
                 openPulls = 0,
                 watchers = 5
@@ -162,8 +158,6 @@ internal class JsonStatsPersistenceSourceTest {
                 "closedIssues": 4612,
                 "openIssues": 2269,
                 "projects": 5,
-                "contributors": 558,
-                "releases": 163,
                 "closedPulls": 5535,
                 "openPulls": 176,
                 "watchers": 612
@@ -180,8 +174,6 @@ internal class JsonStatsPersistenceSourceTest {
                 "closedIssues": 2,
                 "openIssues": 0,
                 "projects": 0,
-                "contributors": 1,
-                "releases": 0,
                 "closedPulls": 0,
                 "openPulls": 0,
                 "watchers": 5

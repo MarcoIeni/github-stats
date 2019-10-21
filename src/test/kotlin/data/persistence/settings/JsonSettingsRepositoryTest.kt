@@ -103,8 +103,6 @@ internal class JsonSettingsRepositoryTest {
                 closedIssues = true,
                 openIssues = true,
                 projects = false,
-                contributors = true,
-                releases = false,
                 closedPulls = true,
                 openPulls = true,
                 watchers = true

@@ -11,8 +11,6 @@ data class ProjectProperties(
     val closedIssues: Boolean,
     val openIssues: Boolean,
     val projects: Boolean,
-    val contributors: Boolean,
-    val releases: Boolean,
     val closedPulls: Boolean,
     val openPulls: Boolean,
     val watchers: Boolean

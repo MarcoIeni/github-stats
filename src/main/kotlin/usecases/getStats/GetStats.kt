@@ -35,8 +35,6 @@ class GetStats(
             closedIssues = getFilteredProperty(projectProperties.closedIssues, project.closedIssues) as Int?,
             openIssues = getFilteredProperty(projectProperties.openIssues, project.openIssues) as Int?,
             projects = getFilteredProperty(projectProperties.projects, project.projects) as Int?,
-            contributors = getFilteredProperty(projectProperties.contributors, project.contributors) as Int?,
-            releases = getFilteredProperty(projectProperties.releases, project.releases) as Int?,
             closedPulls = getFilteredProperty(projectProperties.closedPulls, project.closedPulls) as Int?,
             openPulls = getFilteredProperty(projectProperties.openPulls, project.openPulls) as Int?,
             watchers = getFilteredProperty(projectProperties.watchers, project.watchers) as Int?

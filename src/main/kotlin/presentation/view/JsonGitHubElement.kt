@@ -13,8 +13,6 @@ data class JsonProject(
     val closedIssues: Int?,
     val openIssues: Int?,
     val projects: Int?,
-    val contributors: Int?,
-    val releases: Int?,
     val closedPulls: Int?,
     val openPulls: Int?,
     val watchers: Int?
@@ -28,8 +26,6 @@ data class JsonProject(
         closedIssues = projectViewModel.closedIssues?.toInt(),
         openIssues = projectViewModel.openIssues?.toInt(),
         projects = projectViewModel.projects?.toInt(),
-        contributors = projectViewModel.contributors?.toInt(),
-        releases = projectViewModel.releases?.toInt(),
         closedPulls = projectViewModel.closedPulls?.toInt(),
         openPulls = projectViewModel.openPulls?.toInt(),
         watchers = projectViewModel.watchers?.toInt()

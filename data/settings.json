@@ -17,8 +17,6 @@
         "closedIssues": true,
         "openIssues": true,
         "projects": true,
-        "contributors": true,
-        "releases": true,
         "closedPulls": true,
         "openPulls": true,
         "watchers": true

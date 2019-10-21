@@ -14,9 +14,7 @@ data class ProjectViewModel(
     val closedIssues: String?,
     val openIssues: String?,
     val projects: String?,
-    val contributors: String?,
     val branches: String?,
-    val releases: String?,
     val closedPulls: String?,
     val openPulls: String?,
     val watchers: String?
@@ -29,9 +27,7 @@ data class ProjectViewModel(
         closedIssues = project.closedIssues?.toString(),
         openIssues = project.openIssues?.toString(),
         projects = project.projects?.toString(),
-        contributors = project.contributors?.toString(),
         branches = project.branches?.toString(),
-        releases = project.releases?.toString(),
         closedPulls = project.closedPulls?.toString(),
         openPulls = project.openPulls?.toString(),
         watchers = project.watchers?.toString()

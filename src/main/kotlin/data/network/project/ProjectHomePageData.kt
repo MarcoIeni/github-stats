@@ -12,14 +12,15 @@ fun newProjectHomePageData(homePage: Document): ProjectHomePageData = homePage.r
     val someSocialCountValues = getIntValuesFromJsoupElementList(someSocialCount)
     val secondBarValues = getIntValuesFromJsoupElementList(secondBar)
 
+    val commits = secondBarValues[0]
+    val branches = secondBarValues[1]
+
     return ProjectHomePageData(
         openIssues = navValues[0],
         openPulls = navValues[1],
         projects = navValues[2],
-        commits = secondBarValues[0],
-        branches = secondBarValues[1],
-        releases = secondBarValues[2],
-        contributors = secondBarValues[3],
+        commits = commits,
+        branches = branches,
         watchers = someSocialCountValues[0],
         forks = getIntValuesFromJsoupElementList(forksElem)[0],
         stars = someSocialCountValues[1]
@@ -33,8 +34,6 @@ data class ProjectHomePageData(
     val forks: Int,
     val openIssues: Int,
     val projects: Int,
-    val contributors: Int,
-    val releases: Int,
     val openPulls: Int,
     val watchers: Int
 )

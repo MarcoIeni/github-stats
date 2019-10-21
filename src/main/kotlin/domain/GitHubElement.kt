@@ -13,8 +13,6 @@ data class Project (
     val closedIssues: Int,
     val openIssues: Int,
     val projects: Int,
-    val contributors: Int,
-    val releases: Int,
     val closedPulls: Int,
     val openPulls: Int,
     val watchers: Int

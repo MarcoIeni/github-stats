@@ -33,8 +33,6 @@ internal class GetStatsTest {
                 closedIssues = 5,
                 openIssues = 6,
                 projects = 7,
-                contributors = 8,
-                releases = 9,
                 closedPulls = 10,
                 openPulls = 22,
                 watchers = 11
@@ -70,8 +68,6 @@ internal class GetStatsTest {
                     closedIssues = 5,
                     openIssues = 6,
                     projects = 7,
-                    contributors = 8,
-                    releases = 9,
                     closedPulls = 10,
                     openPulls = null,
                     watchers = 11

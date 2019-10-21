@@ -32,8 +32,6 @@ class ProjectNetworkScraper(
         projects = projectNetworkData.homePageData.projects,
         commits = projectNetworkData.homePageData.commits,
         branches = projectNetworkData.homePageData.branches,
-        releases = projectNetworkData.homePageData.releases,
-        contributors = projectNetworkData.homePageData.contributors,
         watchers = projectNetworkData.homePageData.watchers,
         forks = projectNetworkData.homePageData.forks,
         closedIssues = projectNetworkData.issuesPageData.closedIssues,
