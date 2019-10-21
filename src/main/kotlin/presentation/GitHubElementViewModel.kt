@@ -1,6 +1,5 @@
 package presentation
 
-import domain.User
 import usecases.getStats.FilteredProject
 import usecases.getStats.FilteredUser
 

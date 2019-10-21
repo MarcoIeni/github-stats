@@ -1,6 +1,5 @@
 package data.network
 
-import domain.GitHubElement
 import domain.User
 import domain.UserId
 import org.jsoup.Jsoup

@@ -1,7 +1,5 @@
 package data.network.project
 
-import data.network.project.ProjectIssuesPageData
-import data.network.project.newProjectIssuesPageData
 import org.jsoup.Jsoup
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
