@@ -1,13 +1,10 @@
 package repositories
 
 import data.persistence.stats.CachedStats
-import kotlinx.coroutines.*
-
 import domain.GitHubElement
 import domain.GitHubElementId
+import kotlinx.coroutines.*
 import repositories.settings.SettingsRepository
-import java.lang.Exception
-import java.net.UnknownHostException
 
 class StatsRepository(
     private val statsPersistenceSource: StatsPersistenceSource,
@@ -23,15 +20,13 @@ class StatsRepository(
             try {
                 getNewStats()
             } catch (e: Exception) {
-                println(e)
-                println("No/slow connection. Getting cached stats")
+                // TODO signal that stats are cached in json
                 statsPersistenceSource.cachedStats.stats
             }
         }
 
     private fun getNewStats(): List<GitHubElement> {
         val trackedStatsIds = statsPersistenceSource.trackedStatsIds
-        println(trackedStatsIds)
         val newStats = runBlocking {
             return@runBlocking statsNetworkSource.getStatList(trackedStatsIds)
         }
