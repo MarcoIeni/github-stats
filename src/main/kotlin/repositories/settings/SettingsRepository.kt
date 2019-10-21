@@ -19,7 +19,6 @@ interface SettingsRepository {
     fun isCacheValid(cacheTimestamp: LocalDateTime): Boolean {
         val now = LocalDateTime.now()
         val timeDifference: Long = ChronoUnit.SECONDS.between(now, cacheTimestamp)
-        println(cacheExpiryTime)
         return timeDifference < cacheExpiryTime
     }
 }
