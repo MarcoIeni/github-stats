@@ -5,6 +5,7 @@ import domain.GitHubElement
 import domain.GitHubElementId
 import kotlinx.coroutines.*
 import repositories.settings.SettingsRepository
+import java.time.LocalDateTime
 
 class StatsRepository(
     private val statsPersistenceSource: StatsPersistenceSource,
@@ -43,7 +44,7 @@ class StatsRepository(
             }
         }
         job = GlobalScope.launch {
-            statsPersistenceSource.cachedStats = CachedStats(newStats)
+            statsPersistenceSource.cachedStats = CachedStats(newStats, LocalDateTime.now())
         }
     }
 }
