@@ -61,7 +61,8 @@ internal class JsonStatsPersistenceSourceTest {
                 openPulls = 0,
                 watchers = 5
             )
-        )
+        ),
+        timestamp = DateSerializer().getDateFromString("2019-10-24 23:52:07")
     )
 
     private val jsonRepository = JsonStatsPersistenceSource(
@@ -107,21 +108,9 @@ internal class JsonStatsPersistenceSourceTest {
             )
         )
         testJsonRepository.cachedStats = cachedStats
-        val timestamp = cachedStats.timestamp
+        val timestamp = DateSerializer().getStringFromDate(cachedStats.timestamp)
         val expectedTimestampString = """
-            "timestamp": {
-              "date": {
-                "year": ${timestamp.year},
-                "month": ${timestamp.monthValue},
-                "day": ${timestamp.dayOfMonth}
-              },
-              "time": {
-                "hour": ${timestamp.hour},
-                "minute": ${timestamp.minute},
-                "second": ${timestamp.second},
-                "nano": ${timestamp.nano}
-              }
-            },
+            "timestamp": "$timestamp",
         """.trimIndent()
 
         val expectedStatsString = """
