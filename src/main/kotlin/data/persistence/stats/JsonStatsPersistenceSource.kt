@@ -65,9 +65,9 @@ class JsonStatsPersistenceSource(private val persistenceFilePaths: PersistenceFi
 class DateSerializer {
     private val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
 
-    fun getDateFromString(str: String) = LocalDateTime.parse(str, formatter)
+    fun getDateFromString(str: String) = LocalDateTime.parse(str, formatter)!!
 
-    fun getStringFromDate(date: LocalDateTime) = date.format(formatter)
+    fun getStringFromDate(date: LocalDateTime) = date.format(formatter)!!
 
 }
 
