@@ -1,75 +1,81 @@
-# GitHub Stats
-GitHub stats use the [GitHub API v4](https://developer.github.com/v4/) that uses GraphQL.
+# GitHubStats
+GitHubStats uses web scraping in order to parse some public information about repositories and users.
 
-Oppure:
-GitHub stats use web scraping instead of GitHub API because in this way you don't have to login.
-Furthermore at time of writing GitHub API v4 does not support all the stats provided by this application.
+example output:
 
-## queries
-
-```
+``` json
 {
-  rateLimit{
-    cost
-    remaining
-  }
-  repository(owner: "syl20bnr", name: "spacemacs") {
-    nameWithOwner
-    forkCount
-    stargazers {
-      totalCount
+  "repos": [
+    {
+      "repository": "syl20bnr/spacemacs",
+      "stars": 186,
+      "commits": 7439,
+      "branches": 12,
+      "forks": 4589,
+      "closedIssues": 4691,
+      "openIssues": 2314,
+      "projects": 5,
+      "closedPulls": 5702,
+      "openPulls": 148,
+      "watchers": 606
+    },
+    {
+      "repository": "MarcoIeni/intelli-space",
+      "stars": 105,
+      "commits": 18,
+      "branches": 1,
+      "forks": 13,
+      "closedIssues": 2,
+      "openIssues": 0,
+      "projects": 0,
+      "closedPulls": 0,
+      "openPulls": 0,
+      "watchers": 7
     }
-    pullRequests: pullRequests {
-      totalCount
+  ],
+  "users": [
+    {
+      "name": "MarcoIeni",
+      "followers": 7,
+      "repositories": 12,
+      "projects": 0,
+      "stars": 22,
+      "following": 9
+    },
+    {
+      "name": "syl20bnr",
+      "followers": 930,
+      "repositories": 162,
+      "projects": 0,
+      "stars": 812,
+      "following": 61
     }
-    watchers {
-      totalCount
-    }
-    openPullRequests: pullRequests(states:[OPEN]) {
-      totalCount
-    }
-    issues {
-      totalCount
-    }
-    openIssues: issues(states:[OPEN]) {
-      totalCount
-    }
-    commits: object(expression:"master") {
-      ... on Commit {
-        history {
-          totalCount
-        }
-      }
-    }
-  }
+  ]
 }
 ```
 
-## Build and execute
-To execute the cli app execute the gradle: tasks/distribution/installDist
-Then execute the script in build/install/github-stats/bin
+Data retrieved from github.com are cached locally.
+You can specify cache validity time from settings.
 
-## Example
-```
-ghs login <username> <password>
+GitHubStats is an attempt to experiment with
+[Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
+in Kotlin by implementing a project that is more complex than usual examples you can find on the internet.
 
-ghs logout
+## Settings
+In the data folder you can find two json files.
+Default files are given in order to provide examples.
 
-# show tracked stats
-ghs show
+### settings.json
+This file contains:
+- cacheExpiryTime: seconds of cache validity.
+- userProperties: set to true if you want to see that user property in the output.
+- projectProperties: set to true if you want to see that project property in the output.
 
-# add MarcoIeni to tracked users
-ghs add MarcoIeni
+## tracked.json
+- users: array of user you want to track.
+- proejcts: array of projects you want to track.
 
-# add MarcoIeni/intelli-space to tracked repos
-ghs add MarcoIeni/intelli-space
-
-# show tracked users and repos
-ghs ls
-
-# remove repo or user from tracked elements
-ghs rm MarcoIeni/intelli-space
-
-# set cache expiry time to 30 minutes
-ghs expire-time 30
-```
+## Execution
+All parameters are specified from the json settings.
+The executable does not support options of any kind.
+Just run the executable and you'll see the stats formatted in json in the standard output.
