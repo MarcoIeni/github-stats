@@ -1,5 +1,5 @@
 {
-    "cacheExpiryTime": 0,
+    "cacheExpiryTime": 100,
 
     "userProperties": {
         "followers": true,
