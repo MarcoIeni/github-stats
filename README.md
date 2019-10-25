@@ -59,19 +59,23 @@ You can specify cache validity time from settings.
 
 GitHubStats is an attempt to experiment with
 [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
-in Kotlin by implementing a project that is more complex than usual examples you can find on the internet.
+in Kotlin by implementing a project that is more complex than usual online examples.
 
 ## Settings
 In the data folder you can find two json files.
-Default files are given in order to provide examples.
+Default files are given: edit them.
 
 ### settings.json
 This file contains:
-- cacheExpiryTime: seconds of cache validity.
+- cacheExpiryTime: seconds of cache validity. For example, if it is 10 and you
+  retrieve the stats again after a time < 10 seconds, then the output will be
+  the same, because stats are read from your local copy, which was saved in
+  data/cache.json.
 - userProperties: set to true if you want to see that user property in the output.
 - projectProperties: set to true if you want to see that project property in the output.
 
 ## tracked.json
+This file contains:
 - users: array of user you want to track.
 - proejcts: array of projects you want to track.
 
