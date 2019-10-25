@@ -83,3 +83,18 @@ This file contains:
 All parameters are specified from the json settings.
 The executable does not support options of any kind.
 Just run the executable and you'll see the stats formatted in json in the standard output.
+
+## FAQ
+### Why contributors count and releases are not present?
+This project works with data scraping, i.e. it loads the html and retrieve data from there.
+
+When you have a slow connection contributors are not loaded immediately: "fetching contributors" is showed at first instead.
+
+I don't know how to tell Jsoup to wait until "fetching contributors" disappears in order to retrieve contributors.
+
+Releases are not retrieved because sometimes contributors are loaded
+and sometimes they are not and so the scraper cannot understand if a projects
+tab is present or not by simply counting the elements of the navigation bar.
+
+Releases could be added by checking if the word "packages" is present in the navigation bar for example.
+If you want to play with Kotlin and Clean architecture, a pull request is welcome!
